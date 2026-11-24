@@ -5,6 +5,8 @@ Este repo guarda el motor (`engine.py`), los guiones (`guiones/`), los videos (`
 
 ## Cómo se hace un video (lo sigue la tarea programada)
 
+0. **Leer `aprendizajes.md`** (si existe): ahí la revisión semanal anota qué funcionó en el canal y en canales parecidos. Aplicar esas conclusiones al elegir el tema, el gancho y el guion.
+
 1. **Preparar el entorno**
    ```bash
    pip install piper-tts --break-system-packages -q
