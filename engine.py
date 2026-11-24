@@ -14,9 +14,8 @@ FONTDIR = "/usr/share/fonts/truetype/google-fonts/ofl/"
 EMOJI_FONT = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
 VOICE_DIR = os.path.expanduser("~/.cache/vida_voice")
 VOICE_URL = "https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-es-carlfm-x-low.tar.gz"
-VOICE_FX = ("aresample=44100,rubberband=pitch=1.1:tempo=1.0,highpass=f=80,"
-            "equalizer=f=3000:t=q:w=1:g=1.5,acompressor=threshold=-24dB:ratio=3:makeup=6,"
-            "aecho=0.8:0.6:60|140:0.18|0.08,loudnorm=I=-14:TP=-1")
+VOICE_FX = ("aresample=44100,rubberband=pitch=1.03:tempo=1.08,highpass=f=80,equalizer=f=200:t=q:w=1:g=3,"
+            "equalizer=f=3500:t=q:w=1:g=3,acompressor=threshold=-26dB:ratio=4:makeup=8,aecho=0.8:0.5:40:0.1,loudnorm=I=-14:TP=-1")
 LEAD, TAIL = 0.2, 0.45
 YELLOW = (255, 205, 40)
 
