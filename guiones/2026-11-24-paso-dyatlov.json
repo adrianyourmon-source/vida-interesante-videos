@@ -1,26 +1,213 @@
 {
-  "slug": "2026-11-24-paso-dyatlov",
-  "categoria": "Misterios y terror",
-  "mood": "dark",
-  "youtube": {
-    "title": "El misterio del Paso Diátlov 🏔️ #shorts",
-    "description": "En 1959, nueve excursionistas murieron en los montes Urales en circunstancias que aterraron al mundo. ¿Qué pasó realmente?\n\nFuentes: investigación de la Fiscalía rusa (2020); Gaume y Puzrin, Communications Earth & Environment (2021).\n\n#misterio #pasodiatlov #historia #shorts",
-    "tags": ["misterio", "paso diatlov", "dyatlov", "historia", "terror", "shorts"]
-  },
-  "scenes": [
-    {"bg": "fog", "planet": "moon", "emoji": ["🏔️"], "title": ["EL MISTERIO DEL", "PASO DIÁTLOV"],
-     "line": "En 1959, nueve excursionistas murieron en las montañas de Rusia. Lo que encontraron después... aterró a todos."},
-    {"bg": "fog", "emoji": ["⛺"], "anim": "shake", "chip": "1 · LA CARPA",
-     "line": "Su carpa estaba rasgada desde adentro, como si hubieran huido con prisa de algo."},
-    {"bg": "night", "emoji": ["🥶", "❄️"], "chip": "2 · BAJO CERO", "big": "-30 °C",
-     "line": "Salieron a la nieve casi sin ropa ni zapatos, con temperaturas de unos treinta grados bajo cero."},
-    {"bg": "fire", "emoji": ["💀"], "anim": "pulse", "chip": "3 · HERIDAS EXTRAÑAS",
-     "line": "Algunos tenían fracturas graves en el cráneo y el pecho, pero casi ninguna herida por fuera."},
-    {"bg": "sepia", "emoji": ["👽", "☢️", "🦍"], "chip": "4 · LAS TEORÍAS",
-     "line": "Se habló de ovnis, armas secretas y hasta del yeti. Pero en 2020, la fiscalía rusa concluyó que fue una avalancha."},
-    {"bg": "lab", "emoji": ["🏔️", "🔬"], "chip": "5 · LA CIENCIA", "big": "AVALANCHA",
-     "line": "Un estudio de 2021 mostró que una pequeña avalancha de placa podría explicar la carpa y las heridas. Aun así, muchos siguen dudando."},
-    {"bg": "fog", "title": ["¿TÚ QUÉ CREES", "QUE PASÓ?"],
-     "line": "¿Tú qué crees que pasó? Déjalo en los comentarios."}
+ "slug": "2026-11-24-paso-dyatlov",
+ "categoria": "Misterios y terror",
+ "mood": "dark",
+ "youtube": {
+  "title": "El misterio del Paso Diátlov 🏔️ ¿Qué les pasó? #shorts",
+  "description": "En febrero de 1959, nueve excursionistas murieron en los montes Urales en circunstancias que todavía generan debate. Carpa rasgada desde adentro, huellas descalzas en la nieve y heridas extrañas... ¿qué pasó realmente?\n\nFuentes: expediente soviético de 1959; Fiscalía General de Rusia (2020); Gaume y Puzrin, Communications Earth & Environment (2021).\n\n#misterio #pasodiatlov #historia #terror #shorts",
+  "tags": [
+   "misterio",
+   "paso diatlov",
+   "dyatlov",
+   "historia",
+   "terror",
+   "casos sin resolver",
+   "shorts"
   ]
+ },
+ "scenes": [
+  {
+   "bg": "fog",
+   "planet": "moon",
+   "title": [
+    "9 EXCURSIONISTAS",
+    "Y UN MISTERIO"
+   ],
+   "stickman": [
+    {
+     "action": "scared",
+     "x": 0.5
+    }
+   ],
+   "line": "En febrero de 1959, nueve excursionistas desaparecieron en los montes Urales. Lo que encontraron semanas después sigue dando escalofríos.",
+   "weather": "snow"
+  },
+  {
+   "bg": "fog",
+   "chip": "1 · LA EXPEDICIÓN",
+   "emoji": [
+    "🎒"
+   ],
+   "stickman": [
+    {
+     "action": "walk",
+     "x": 0.35,
+     "color": "yellow",
+     "say": "¡VAMOS!"
+    },
+    {
+     "action": "walk",
+     "x": 0.65,
+     "phase": 0.8
+    }
+   ],
+   "line": "Eran estudiantes y graduados con experiencia, liderados por Ígor Diátlov. Querían cruzar una de las rutas más difíciles de la región."
+  },
+  {
+   "bg": "night",
+   "chip": "2 · LA ÚLTIMA NOCHE",
+   "emoji": [
+    "⛺",
+    "🌙"
+   ],
+   "stickman": [
+    {
+     "action": "idle",
+     "x": 0.5,
+     "face": "neutral"
+    }
+   ],
+   "line": "La noche del uno al dos de febrero acamparon en la ladera de una montaña. Nunca regresaron."
+  },
+  {
+   "bg": "fog",
+   "chip": "3 · LA CARPA",
+   "emoji": [
+    "⛺"
+   ],
+   "anim": "shake",
+   "stickman": [
+    {
+     "action": "look",
+     "x": 0.5,
+     "prop": "🔦",
+     "face": "surprised",
+     "say": "¿QUÉ?"
+    }
+   ],
+   "line": "Cuando los rescatistas encontraron la carpa, estaba rasgada desde adentro, como si hubieran huido con mucha prisa.",
+   "weather": "snow"
+  },
+  {
+   "bg": "night",
+   "chip": "4 · SIN ROPA",
+   "big": "-30 °C",
+   "emoji": [
+    "❄️"
+   ],
+   "stickman": [
+    {
+     "action": "shiver",
+     "x": 0.5,
+     "say": "¡QUÉ FRÍO!"
+    }
+   ],
+   "line": "Las huellas mostraban que salieron a la nieve casi sin ropa, algunos descalzos, con temperaturas de unos treinta grados bajo cero."
+  },
+  {
+   "bg": "fog",
+   "chip": "5 · EL CEDRO",
+   "emoji": [
+    "🌲",
+    "🔥"
+   ],
+   "stickman": [
+    {
+     "action": "sad",
+     "x": 0.5
+    }
+   ],
+   "line": "A más de un kilómetro, bajo un gran cedro, hallaron restos de una fogata y los dos primeros cuerpos."
+  },
+  {
+   "bg": "fire",
+   "chip": "6 · HERIDAS EXTRAÑAS",
+   "emoji": [
+    "💀"
+   ],
+   "anim": "pulse",
+   "stickman": [
+    {
+     "action": "scared",
+     "x": 0.5,
+     "say": "¡NO PUEDE SER!"
+    }
+   ],
+   "line": "Meses después, en un barranco, aparecieron los últimos cuatro. Algunos tenían fracturas graves en el cráneo y el pecho, pero casi sin heridas por fuera."
+  },
+  {
+   "bg": "sepia",
+   "chip": "7 · LAS TEORÍAS",
+   "emoji": [
+    "👽",
+    "☢️",
+    "🦍"
+   ],
+   "stickman": [
+    {
+     "action": "think",
+     "x": 0.4
+    }
+   ],
+   "line": "Se habló de ovnis, pruebas militares secretas y hasta del yeti. El expediente de 1959 solo dijo que murieron por una fuerza natural irresistible."
+  },
+  {
+   "bg": "lab",
+   "chip": "8 · EL CASO SE REABRE",
+   "big": "AVALANCHA",
+   "stickman": [
+    {
+     "action": "point",
+     "x": 0.4,
+     "say": "¡FUE ESO!"
+    }
+   ],
+   "line": "En 2020, la fiscalía rusa revisó el caso y concluyó que una avalancha los obligó a huir de la carpa."
+  },
+  {
+   "bg": "lab",
+   "chip": "9 · LA CIENCIA",
+   "emoji": [
+    "🏔️",
+    "🔬"
+   ],
+   "stickman": [
+    {
+     "action": "talk",
+     "x": 0.5
+    }
+   ],
+   "line": "Y en 2021, un estudio científico mostró que una pequeña avalancha de placa podría causar heridas así, aunque no explica todos los detalles."
+  },
+  {
+   "bg": "fog",
+   "chip": "10 · ¿CASO CERRADO?",
+   "emoji": [
+    "❓"
+   ],
+   "stickman": [
+    {
+     "action": "shrug",
+     "x": 0.5,
+     "say": "¿Y AHORA?"
+    }
+   ],
+   "line": "Por eso, para muchos, el misterio del Paso Diátlov sigue sin resolverse del todo."
+  },
+  {
+   "bg": "fog",
+   "title": [
+    "¿TÚ QUÉ CREES",
+    "QUE PASÓ?"
+   ],
+   "stickman": [
+    {
+     "action": "wave",
+     "x": 0.22,
+     "size": 0.8
+    }
+   ],
+   "line": "¿Tú qué crees que pasó? Escríbelo en los comentarios y sígueme para más misterios."
+  }
+ ]
 }

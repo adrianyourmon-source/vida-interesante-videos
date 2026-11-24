@@ -5,6 +5,8 @@ Ver INSTRUCCIONES.md para el formato del guion."""
 import numpy as np, subprocess, sys, os, math, json, random, shutil, tempfile, urllib.request, tarfile
 from concurrent.futures import ProcessPoolExecutor
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import stickman
 
 W, H, FPS = 1080, 1920, 30
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -12,9 +14,9 @@ FONTDIR = "/usr/share/fonts/truetype/google-fonts/ofl/"
 EMOJI_FONT = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
 VOICE_DIR = os.path.expanduser("~/.cache/vida_voice")
 VOICE_URL = "https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-es-carlfm-x-low.tar.gz"
-VOICE_FX = ("aresample=44100,rubberband=pitch=0.84:tempo=0.97,highpass=f=60,lowpass=f=7000,"
-            "equalizer=f=140:t=q:w=1:g=5,acompressor=threshold=-22dB:ratio=3:makeup=4,"
-            "aecho=0.8:0.55:70|160|320:0.35|0.22|0.12")
+VOICE_FX = ("aresample=44100,rubberband=pitch=1.1:tempo=1.0,highpass=f=80,"
+            "equalizer=f=3000:t=q:w=1:g=1.5,acompressor=threshold=-24dB:ratio=3:makeup=6,"
+            "aecho=0.8:0.6:60|140:0.18|0.08,loudnorm=I=-14:TP=-1")
 LEAD, TAIL = 0.2, 0.45
 YELLOW = (255, 205, 40)
 
@@ -239,6 +241,14 @@ def bg_underwater(t, sc):
         if r < 0.5: branch(d, x, y, math.pi / 2 + 0.1 * math.sin(t + r * 6), 100, 20, col + (255,), 5)
         else: d.ellipse([x - 65, y - 55, x + 65, y + 40], fill=col + (255,))
     return im
+_FOG = {}
+def _fog(layer):
+    if layer not in _FOG:
+        fog = Image.new("RGBA", (W * 2, 700), (0, 0, 0, 0)); fd = ImageDraw.Draw(fog); fr = random.Random(layer)
+        for _ in range(18):
+            fx, fy = fr.randint(200, W * 2 - 200), fr.randint(220, 480); fd.ellipse([fx - 260, fy - 70, fx + 260, fy + 70], fill=(170, 185, 185, 40))
+        _FOG[layer] = fog.filter(ImageFilter.GaussianBlur(40))
+    return _FOG[layer]
 def bg_fog(t, sc):  # bosque oscuro con niebla (terror)
     im = grad((12, 18, 22), (40, 52, 55)); d = ImageDraw.Draw(im)
     if sc.get("planet") == "moon": planet(im, "moon", 840, 640, 100, t, 0.8)
@@ -246,13 +256,10 @@ def bg_fog(t, sc):  # bosque oscuro con niebla (terror)
         col = [(30, 40, 44), (18, 24, 27), (6, 8, 10)][layer]
         for l, x, y, h, w in TREES:
             if l != layer: continue
-            d.polygon([(x, y - h), (x - w, y), (x + w, y)], fill=col + (255,)); d.rectangle([x - 8, y, x + 8, y + 60], fill=col + (255,))
+            d.polygon([(x, y - h), (x - w, y), (x + w, y)], fill=col + (255,))
         d.rectangle([0, 1180 + layer * 170 + 40, W, H], fill=col + (255,))
-        fog = Image.new("RGBA", (W * 2, 500), (0, 0, 0, 0)); fd = ImageDraw.Draw(fog); fr = random.Random(layer)
-        for _ in range(16):
-            fx, fy = fr.randint(0, W * 2), fr.randint(100, 400); fd.ellipse([fx - 260, fy - 70, fx + 260, fy + 70], fill=(170, 185, 185, 40))
-        fog = fog.filter(ImageFilter.GaussianBlur(40)); off = int((t * (25 + 15 * layer)) % W)
-        im.alpha_composite(fog.crop((off, 0, off + W, 500)), (0, 980 + layer * 170))
+        fog = _fog(layer); off = int((t * (25 + 15 * layer)) % W)
+        im.alpha_composite(fog.crop((off, 0, off + W, 700)), (0, 880 + layer * 170))
     return im
 def bg_sepia(t, sc):  # papel antiguo (historia)
     n = value_noise(W // 4, H // 4, 5, 13)
@@ -304,6 +311,7 @@ def draw_emojis(im, sc, t, D, y=700):
     if isinstance(em, str): em = [em]
     if not em: return
     anim = sc.get("anim", "float"); n = len(em); size = [400, 300, 240][min(n, 3) - 1]
+    if sc.get("stickman"): size = int(size * 0.55); y = 560
     gap = W / (n + 1)
     for i, e in enumerate(em):
         ti = t - 0.15 - i * 0.25; p = ease(ti / 0.35)
@@ -319,7 +327,7 @@ def draw_emojis(im, sc, t, D, y=700):
         paste_c(im, img, gap * (i + 1), y + dy, alpha)
 
 CAPF = None
-def captions(img, words, t, y=1290):
+def captions(img, words, t, y=1555):
     global CAPF
     if CAPF is None: CAPF = font(76, "Black")
     cur = None
@@ -346,8 +354,10 @@ def frame(spec, i, t, D, words):
     sc = spec["scenes"][i]; kind = "hook" if i == 0 else "cta" if i == len(spec["scenes"]) - 1 else "body"
     bgname = sc.get("bg", spec.get("bg", "space"))
     im = BGS.get(bgname, bg_space)(t, sc)
+    figs = sc.get("stickman") or []
+    if isinstance(figs, dict): figs = [figs]
     if kind == "hook":
-        draw_emojis(im, sc, t, D, y=900)
+        if not figs: draw_emojis(im, sc, t, D, y=900)
         p = ease(t / 0.35); top, bot = sc.get("title", ["", ""])[:2]
         text_center(im, top, 300, anton(150), scale=.8 + .2 * p, alpha=p)
         text_center(im, bot, 470, anton(150), fill=YELLOW, scale=.8 + .2 * p, alpha=p)
@@ -363,9 +373,13 @@ def frame(spec, i, t, D, words):
     else:
         draw_emojis(im, sc, t, D)
         if sc.get("big"):
-            p = ease((t - D * 0.3) / 0.4); text_center(im, sc["big"], 1040, anton(130), fill=YELLOW, scale=.8 + .2 * p, alpha=p)
+            p = ease((t - D * 0.3) / 0.4); text_center(im, sc["big"], 390 if figs else 1040, anton(130), fill=YELLOW, scale=.8 + .2 * p, alpha=p)
         chip(im, sc.get("chip", ""), ease(t / 0.3))
-        captions(im, words, t)
+    if figs: draw_decor(im, sc, bgname, t)
+    for fg in figs: stickman.draw(im, fg, t, D, emoji_fn=emoji_img)
+    weather(im, sc.get("weather", spec.get("weather", "auto")), bgname, t)
+    if kind == "body": captions(im, words, t)
+    overlay(im, spec, t)
     if bgname in DARK or spec.get("mood") == "dark":
         im.alpha_composite(vig(0.85))
         g = GRAIN[int(t * FPS / 3) % 4]; gl = Image.new("RGBA", (W, H), (255, 255, 255, 0)); gl.putalpha(g.point(lambda p: max(0, p - 150) // 3))
@@ -375,6 +389,39 @@ def frame(spec, i, t, D, words):
     else:
         im.alpha_composite(vig(0.45))
     return zoom(im, 1.0 + 0.04 * t / D)
+
+DECOR = {"fog": ["🌲", "🌲"], "night": ["🌲", "🏔️"], "sepia": ["📜", "🕯️"], "lab": ["🧪", "🧬"], "space": ["🛰️", "☄️"], "ocean": ["🐚", "⛵"],
+         "underwater": ["🐟", "🐠"], "desert": ["🌵", "🐪"], "city": ["🚗", "🏢"], "fire": ["🔥", "🔥"]}
+def draw_decor(im, sc, bgname, t):
+    dec = sc.get("decor", DECOR.get(bgname, []))
+    if isinstance(dec, str): dec = [dec]
+    xs = [0.12, 0.88, 0.25, 0.75]
+    for k, e in enumerate(dec[:4]):
+        img = emoji_img(e, 210 if k < 2 else 150)
+        paste_c(im, img, W * xs[k], stickman.GROUND - img.height / 2 + 30 + 6 * math.sin(t * 1.5 + k), 1.0)
+
+WEATHER_AUTO = {"night": "snow", "fog": "dust", "fire": "none", "sepia": "dust", "lab": "none", "space": "none", "underwater": "none",
+                "ocean": "none", "desert": "dust", "city": "rain"}
+FLAKES = [(rng0.random() * W, rng0.random() * H, rng0.random() * 6.28, 3 + rng0.random() * 7, 0.5 + rng0.random()) for _ in range(160)]
+def weather(im, kind, bgname, t):
+    if kind == "auto": kind = WEATHER_AUTO.get(bgname, "none")
+    if kind == "none": return
+    d = ImageDraw.Draw(im)
+    for x, y, ph, s, sp in FLAKES:
+        if kind == "snow":
+            yy = (y + t * 140 * sp) % H; xx = x + 30 * math.sin(t * sp + ph); d.ellipse([xx - s / 2, yy - s / 2, xx + s / 2, yy + s / 2], fill=(255, 255, 255, 200))
+        elif kind == "rain":
+            yy = (y + t * 1400 * sp) % H; xx = x - (t * 200) % W; xx %= W; d.line([(xx, yy), (xx - 6, yy + 40)], fill=(180, 200, 255, 120), width=3)
+        elif kind == "dust":
+            yy = (y - t * 20 * sp) % H; xx = (x + t * 25 * sp) % W; a = int(90 + 70 * math.sin(t * 2 + ph)); d.ellipse([xx - s / 3, yy - s / 3, xx + s / 3, yy + s / 3], fill=(230, 230, 220, max(0, a)))
+
+HANDLE = "VIDA INTERESANTE"
+def overlay(im, spec, t):
+    g = spec.get("_start", 0) + t; tot = spec.get("_total", 1)
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle([60, 1870, W - 60, 1884], 7, fill=(255, 255, 255, 70))
+    d.rounded_rectangle([60, 1870, 60 + (W - 120) * min(1, g / tot), 1884], 7, fill=YELLOW + (255,))
+    f = font(34, "ExtraBold"); d.text((W / 2, 1815), HANDLE, font=f, fill=(255, 255, 255, 150), anchor="mm", stroke_width=3, stroke_fill=(0, 0, 0, 120))
 
 def render_scene(args):
     spec, i, D, vd, out = args
@@ -401,7 +448,7 @@ def ensure_voice():
 
 def tts(text, out):
     m = ensure_voice(); raw = out + ".raw.wav"
-    subprocess.run([sys.executable, "-m", "piper", "-m", m, "--length-scale", "1.08", "--sentence-silence", "0.35", "-f", raw], input=text.encode(), check=True, capture_output=True)
+    subprocess.run([sys.executable, "-m", "piper", "-m", m, "--length-scale", "1.0", "--sentence-silence", "0.25", "-f", raw], input=text.encode(), check=True, capture_output=True)
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", raw, "-af", VOICE_FX, "-ar", "48000", "-ac", "1", out], check=True)
     return float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", out]))
 
@@ -423,7 +470,7 @@ def music(total, mood, starts, SR=48000):
             env = np.clip(tt, 0, 1) * np.clip((seg + 1.0) - tt, 0, 1)
             for f in chords[k % 4]: mus[m] += env * (np.sin(2 * np.pi * f * tt) + .3 * np.sin(4 * np.pi * f * tt) + .5 * np.sin(np.pi * f * tt))
         mus *= 0.5 + 0.5 * np.sin(2 * np.pi * 0.25 * t) ** 2
-    mus = mus / (np.abs(mus).max() + 1e-9) * 0.10
+    mus = mus / (np.abs(mus).max() + 1e-9) * 0.05
     r = np.random.default_rng(1)
     for s in starts[1:]:
         n = int(0.5 * SR); o = int((s - 0.25) * SR); w = np.convolve(r.standard_normal(n), np.ones(40) / 40, "same") * np.hanning(n) * 0.25
@@ -438,7 +485,8 @@ def build(spec_path, out_path):
     durs = [tts(sc["line"], f"{work}/l{i}.wav") for i, sc in enumerate(spec["scenes"])]
     Ds = [round((LEAD + d + TAIL) * FPS) / FPS for d in durs]
     starts = np.cumsum([0] + Ds[:-1]); total = sum(Ds)
-    jobs = [(spec, i, Ds[i], durs[i], f"{work}/s{i}.mp4") for i in range(len(Ds))]
+    spec["_total"] = total
+    jobs = [(dict(spec, _start=float(starts[i])), i, Ds[i], durs[i], f"{work}/s{i}.mp4") for i in range(len(Ds))]
     with ProcessPoolExecutor(max_workers=min(len(jobs), os.cpu_count() or 2)) as ex: files = list(ex.map(render_scene, jobs))
     voice = np.zeros(int(total * SR) + SR)
     for i, s in enumerate(starts):
@@ -447,7 +495,7 @@ def build(spec_path, out_path):
     voice[:].astype(np.float32).tofile(f"{work}/voice.f32")
     m = music(len(voice) / SR, spec.get("mood", "bright"), starts); m.astype(np.float32).tofile(f"{work}/music.f32")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "f32le", "-ar", "48000", "-ac", "1", "-i", f"{work}/voice.f32", "-f", "f32le", "-ar", "48000", "-ac", "1", "-i", f"{work}/music.f32",
-                    "-filter_complex", "[0:a]asplit=2[vo1][vo2];[1:a][vo1]sidechaincompress=threshold=0.03:ratio=4[md];[vo2][md]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5,aresample=48000[out]",
+                    "-filter_complex", "[0:a]asplit=2[vo1][vo2];[1:a][vo1]sidechaincompress=threshold=0.02:ratio=6[md];[vo2]volume=1.4[vo3];[vo3][md]amix=inputs=2:normalize=0,loudnorm=I=-13:TP=-1,aresample=48000[out]",
                     "-map", "[out]", "-ac", "2", "-c:a", "aac", "-b:a", "192k", f"{work}/mix.m4a"], check=True)
     open(f"{work}/list.txt", "w").write("".join(f"file '{f}'\n" for f in files))
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", f"{work}/list.txt", "-c", "copy", f"{work}/v.mp4"], check=True)

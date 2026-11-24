@@ -9,7 +9,7 @@ Este repo guarda el motor (`engine.py`), los guiones (`guiones/`), los videos (`
    ```bash
    pip install piper-tts --break-system-packages -q
    ```
-   La voz (piper `es-carlfm-x-low`) se descarga sola desde GitHub la primera vez. Se procesa con un efecto "narrador de terror": más grave, algo más lenta y con eco (`VOICE_FX` en `engine.py`). No cambiar este efecto salvo que el usuario lo pida.
+   La voz (piper `es-carlfm-x-low`) se descarga sola desde GitHub la primera vez. Se procesa con `VOICE_FX` de `engine.py` (tono parecido al audio de referencia del usuario, volumen alto, eco ligero). No cambiar este efecto salvo que el usuario lo pida.
 
 2. **Elegir el tema.** Rotar entre las cuatro categorías, en este orden según la última línea de `temas_hechos.txt`:
    `¿Qué pasaría si...?` → `Datos curiosos` → `Misterios y terror` → `Historia oscura` → (vuelve a empezar).
@@ -18,7 +18,10 @@ Este repo guarda el motor (`engine.py`), los guiones (`guiones/`), los videos (`
 3. **Investigar y verificar** con WebSearch los datos que se van a decir. Nada inventado. Las leyendas, teorías y casos sin resolver se presentan como tales ("se dice que", "según la leyenda", "una teoría dice"), y si existe una explicación oficial o científica, se dice al final. Nada de salud ni política presentado de forma engañosa.
 
 4. **Escribir el guion** en `guiones/AAAA-MM-DD-slug.json` (copiar la estructura de `guiones/2026-11-24-paso-dyatlov.json`):
-   - 6 a 8 escenas, 40 a 55 segundos en total (unas 120 a 150 palabras de narración).
+   - **Duración objetivo: 1:30** (85 a 95 segundos). Unas 11 a 13 escenas y 220 a 250 palabras de narración. Después de renderizar, si dura más de 100 s o menos de 80 s, ajustar el guion y volver a renderizar.
+   - **Personajes stickman en TODAS las escenas** (`"stickman": [{...}]`, uno o dos por escena). Campos: `action` (`idle`, `talk`, `walk`, `run`, `run_away`, `scared`, `shiver`, `point`, `think`, `cheer`, `shrug`, `look`, `dizzy`, `sad`, `sneak`, `wave`), `face` opcional (`neutral`, `happy`, `fear`, `surprised`, `sad`, `cold`, `thinking`, `angry`, `dizzy`), `x` (0 a 1, posición horizontal; con dos personajes usar 0.35 y 0.65), `facing` (`right`/`left`), `color` (`white`, `yellow`, `red`, `blue`, `green`), `prop` (emoji que sostiene en la mano, ej. "🔦"), `say` (globo de diálogo corto, máx. 3 palabras, sin "¡" y "?" juntos), `phase` (desfase de animación si hay dos), `size` (por defecto 1.2). La acción debe ilustrar lo que dice la narración.
+   - En la escena de cierre poner el stickman con `"x": 0.22, "size": 0.8` (por ejemplo `wave`) para no tapar el globo de comentarios.
+   - Para que no se vea vacío: el motor agrega solo decoración en el suelo según el fondo, partículas (nieve, polvo, lluvia), barra de progreso y la marca "VIDA INTERESANTE". Se puede cambiar con `decor` (lista de 2 a 4 emojis) y `weather` (`snow`, `rain`, `dust`, `none`).
    - Escena 1 = gancho: `title` con 2 líneas cortas en mayúsculas (la segunda sale en amarillo), y una frase que enganche en 2 segundos.
    - Escenas intermedias: `chip` ("1 · ALGO"), `emoji` (1 a 3 emojis simples, sin combinaciones ZWJ), `anim` opcional (`float`, `shake`, `pulse`, `spin`, `fade_out`), `big` opcional (un número o palabra clave corta) y `line` (una o dos frases cortas).
    - Última escena = cierre: `title` con 2-3 líneas y una pregunta para comentar.
@@ -28,7 +31,7 @@ Este repo guarda el motor (`engine.py`), los guiones (`guiones/`), los videos (`
 
 5. **Revisar antes de renderizar:** `python3 engine.py --preview guiones/X.json /tmp/prev` y mirar `/tmp/prev/preview.jpg` (textos que no se salgan, emojis visibles).
 
-6. **Renderizar:** `python3 engine.py guiones/X.json videos/X.mp4` (unos 2-3 minutos). Debe pesar menos de 100 MB.
+6. **Renderizar:** `python3 engine.py guiones/X.json videos/X.mp4` (unos 3-4 minutos). Debe pesar menos de 100 MB.
 
 7. **Guardar en GitHub:** agregar el tema al final de `temas_hechos.txt` (`AAAA-MM-DD | categoría | tema`), luego `git add`, `git commit` y `git -c push.negotiate=true push origin main`.
 
