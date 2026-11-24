@@ -1,0 +1,26 @@
+{
+  "slug": "2026-11-24-paso-dyatlov",
+  "categoria": "Misterios y terror",
+  "mood": "dark",
+  "youtube": {
+    "title": "El misterio del Paso Diátlov 🏔️ #shorts",
+    "description": "En 1959, nueve excursionistas murieron en los montes Urales en circunstancias que aterraron al mundo. ¿Qué pasó realmente?\n\nFuentes: investigación de la Fiscalía rusa (2020); Gaume y Puzrin, Communications Earth & Environment (2021).\n\n#misterio #pasodiatlov #historia #shorts",
+    "tags": ["misterio", "paso diatlov", "dyatlov", "historia", "terror", "shorts"]
+  },
+  "scenes": [
+    {"bg": "fog", "planet": "moon", "emoji": ["🏔️"], "title": ["EL MISTERIO DEL", "PASO DIÁTLOV"],
+     "line": "En 1959, nueve excursionistas murieron en las montañas de Rusia. Lo que encontraron después... aterró a todos."},
+    {"bg": "fog", "emoji": ["⛺"], "anim": "shake", "chip": "1 · LA CARPA",
+     "line": "Su carpa estaba rasgada desde adentro, como si hubieran huido con prisa de algo."},
+    {"bg": "night", "emoji": ["🥶", "❄️"], "chip": "2 · BAJO CERO", "big": "-30 °C",
+     "line": "Salieron a la nieve casi sin ropa ni zapatos, con temperaturas de unos treinta grados bajo cero."},
+    {"bg": "fire", "emoji": ["💀"], "anim": "pulse", "chip": "3 · HERIDAS EXTRAÑAS",
+     "line": "Algunos tenían fracturas graves en el cráneo y el pecho, pero casi ninguna herida por fuera."},
+    {"bg": "sepia", "emoji": ["👽", "☢️", "🦍"], "chip": "4 · LAS TEORÍAS",
+     "line": "Se habló de ovnis, armas secretas y hasta del yeti. Pero en 2020, la fiscalía rusa concluyó que fue una avalancha."},
+    {"bg": "lab", "emoji": ["🏔️", "🔬"], "chip": "5 · LA CIENCIA", "big": "AVALANCHA",
+     "line": "Un estudio de 2021 mostró que una pequeña avalancha de placa podría explicar la carpa y las heridas. Aun así, muchos siguen dudando."},
+    {"bg": "fog", "title": ["¿TÚ QUÉ CREES", "QUE PASÓ?"],
+     "line": "¿Tú qué crees que pasó? Déjalo en los comentarios."}
+  ]
+}
