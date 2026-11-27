@@ -1,0 +1,7 @@
+
+## 2026-11-26 — Revisión manual del canal (7 Shorts, ~6.000 vistas, 14 suscriptores)
+- Números: Tierra deja de girar 3D 1.286 vistas / 49 likes (3,8 %, el mejor); Tierra se detuviera 5 s 1.280 / 44; Luna (nuevo) 1.217 / 18; Luna (primero) 1.182 / 33 (retención 61 %); Paso Diátlov 1.152 / 24 (retención 83 %, 3 compartidos, +2 suscriptores); Sueños 17; Epidemia de baile 1518: 7 (ambos estancados tras >1 día).
+- 98 % de las vistas vienen del feed de Shorts. Público: Perú 30 %, México 27 %, luego Argentina, EE. UU., Colombia.
+- Conclusiones: (1) "¿Qué pasaría si...?" de espacio/Tierra es el tema que más likes da, y el 3D gusta más. (2) Los misterios retienen mucho (83 %) y generan comentarios con detalles: hacer SERIES ("Parte 2", "Parte 3") para ganar suscriptores. (3) Temas poco visuales o de historia antigua (baile 1518) y la voz robótica rinden mal. (4) Todos se frenan en ~1.200 vistas: hay que subir la retención (gancho con número + misterio en los primeros 2 s) y los compartidos.
+- Cambios: todos los videos pasan a 3D con voz Kokoro (neutral), duración ~2:00; prioridad de temas: 1) "¿Qué pasaría si...?" espacio/Tierra/cuerpo humano, 2) misterios en serie, 3) datos curiosos muy visuales. Evitar historia antigua poco conocida salvo que tenga un gancho fuerte. Un video por día como máximo, nunca dos seguidos; mejor hora de publicación: 6-8 p. m. hora de Lima.
+- 26-11: hecho "Paso Diátlov PARTE 2" (3D). La Parte 3 queda pendiente como próximo tema de misterio (por ejemplo: las teorías más extrañas, o el diario y las últimas fotos del grupo).

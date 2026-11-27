@@ -3,6 +3,33 @@
 Canal: **Vida Interesante** (YouTube `interesantevida454@gmail.com`, TikTok "Vida Interesante").
 Este repo guarda el motor (`engine.py`), los guiones (`guiones/`), los videos (`videos/`) y la lista de temas ya hechos (`temas_hechos.txt`).
 
+
+## ⭐ FORMATO ACTUAL: videos 3D con voz neural (desde 26-11-2026)
+
+Desde ahora **todos los videos se hacen en 3D** con `3d/engine3d.py` y la voz neural Kokoro (`em_alex`, neutral y natural). El motor 2D (`engine.py`) queda solo como respaldo si el 3D falla.
+
+**Preparar el entorno:**
+```bash
+pip install moderngl kokoro-onnx soundfile piper-tts --break-system-packages -q
+```
+El modelo de voz (~350 MB) se descarga solo desde GitHub a `~/.cache/kokoro` la primera vez.
+
+**Duración objetivo: 2:00 a 2:10** (unas 17-19 escenas y ~300-330 palabras). Revisar la duración al final; si sale de 1:50 a 2:20 está bien.
+
+**Comandos:**
+- Vista previa (un cuadro por escena, segundos): `python3 3d/engine3d.py --preview guiones/X.json /tmp/prev` → mirar `/tmp/prev/preview3d.jpg`. Corregir personajes cortados, textos encima de cosas importantes, utilería fuera de cuadro.
+- Render (~8 min): `python3 3d/engine3d.py guiones/X.json videos/X.mp4`
+
+**Guion 3D** (ejemplo completo: `guiones/2026-11-26-paso-dyatlov-parte-2.json`). Mismos campos que el 2D (`line`, `chip`, `big`, `emoji`, `title` en la primera y la última escena, `youtube`, `mood`) más:
+- `set` (escenario): `forest_day`, `forest_night`, `snow_day`, `snow_night`, `desert`, `ocean`, `city_night`, `lab`, `red` (peligro/terror), `space`.
+- `camera`: `medium` (normal), `close`, `wide`, `low` (mirando al cielo), `high` (desde arriba), `tall` (para cosas altas). En `space`: `space` o `space_far`.
+- `props` (utilería 3D, lista): `{"type": ..., "x": ..., "z": ..., "s": escala}`. Tipos: `pine`, `snowpine`, `cedar` (`broken`: true), `deadtree`, `house`, `building`, `factory`, `tent` (`buried`, `torn`), `fire`, `rock`, `cactus`, `boots` (`n`), `footprints` (`n`), `orbs` (luces en el cielo, `y`, `n`), `moon` (`y`), `sun` (`y`, `r`), `ravine`, `avalanche`, `wave`, `table`, `flask`, `glow_items`, y para `space`: `earth`, `moon_planet`, `mars` (`r`, `y`, `spin`, `tilt`), `sun`, `ring`. Cada escenario ya trae decoración de fondo; `"keep_decor": false` la quita. x de -2 a 2 queda dentro de cuadro; z negativo = más al fondo.
+- `stickman` (lista): `action`, `face`, `x` (0 a 1), `z`, `y` (altura, ej. trepado a un árbol), `facing`, `color` (`white`, `yellow`, `red`, `blue`, `green`, `orange`), `prop` (emoji en la mano), `say` (globo, máx. 3 palabras), `size`, `phase`, `fly`: true + `fly_at` (sale volando). En `space` el stickman se para sobre el planeta con `wx`, `wy`.
+- `weather`: `snow`, `rain`, `dust`, `embers`, `none` (por defecto según el escenario).
+- `shake_at`: segundo de la escena en que hay un golpe (sacude la cámara y suena un "boom"). `sfx: "boom"` solo el sonido.
+- Si un tema necesita algo que no existe (un animal, un objeto), se puede agregar un tipo nuevo en `prop()` de `3d/engine3d.py` con las piezas básicas (`g.draw` con `sphere`, `cyl`, `cone`, `box`, `pyr`, `torus`), probar con la vista previa y hacer commit del cambio.
+- En el texto narrado escribir los números con palabras ("mil seiscientos") para que la voz los lea bien. Nada de símbolos raros en `big` (la fuente no tiene ☢ ni similares).
+
 ## Cómo se hace un video (lo sigue la tarea programada)
 
 0. **Leer `aprendizajes.md`** (si existe): ahí la revisión semanal anota qué funcionó en el canal y en canales parecidos. Aplicar esas conclusiones al elegir el tema, el gancho y el guion.
@@ -33,7 +60,7 @@ Este repo guarda el motor (`engine.py`), los guiones (`guiones/`), los videos (`
 
 5. **Revisar antes de renderizar:** `python3 engine.py --preview guiones/X.json /tmp/prev` y mirar `/tmp/prev/preview.jpg` (textos que no se salgan, emojis visibles).
 
-6. **Renderizar:** `python3 engine.py guiones/X.json videos/X.mp4` (unos 3-4 minutos). Debe pesar menos de 100 MB.
+6. **Renderizar** con el motor 3D (ver arriba). Solo si falla, usar `python3 engine.py guiones/X.json videos/X.mp4` (2D). Debe pesar menos de 100 MB.
 
 7. **Guardar en GitHub:** agregar el tema al final de `temas_hechos.txt` (`AAAA-MM-DD | categoría | tema`), luego `git add`, `git commit` y `git -c push.negotiate=true push origin main`.
 

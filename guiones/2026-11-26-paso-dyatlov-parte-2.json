@@ -1,0 +1,417 @@
+{
+ "slug": "2026-11-26-paso-dyatlov-parte-2",
+ "categoria": "Misterios y terror",
+ "mood": "dark",
+ "formato": "3d",
+ "youtube": {
+  "title": "Paso Diátlov PARTE 2: los detalles que nadie cuenta 😨🏔️ #shorts",
+  "description": "Botas ordenadas en la carpa, ramas rotas a 5 metros de altura, ropa con radiación, luces naranjas en el cielo... Los detalles más extraños del Paso Diátlov y lo que dicen los expertos.\n\n👇 ¿Avalancha o algo más? Comenta.\n🔔 Sígueme para la Parte 3.\n\nFuentes: History.com; Discover Magazine; EarthSky; Skeptoid; dyatlovpass.com.\n\n#pasodiatlov #misterio #misteriossinresolver #historia #terror #shorts",
+  "tags": [
+   "paso diatlov",
+   "dyatlov",
+   "misterio",
+   "parte 2",
+   "historia",
+   "terror",
+   "misterios sin resolver",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "set": "snow_night",
+   "camera": "medium",
+   "title": [
+    "PASO DIÁTLOV",
+    "PARTE 2"
+   ],
+   "props": [
+    {
+     "type": "moon",
+     "x": 1.4,
+     "y": 4.2,
+     "z": -10
+    }
+   ],
+   "stickman": [
+    {
+     "action": "look",
+     "x": 0.5,
+     "prop": "🔦",
+     "face": "fear"
+    }
+   ],
+   "line": "En la primera parte te conté que nueve excursionistas murieron en el Paso Diátlov. Pero hay detalles tan extraños, que casi nadie los menciona."
+  },
+  {
+   "set": "snow_day",
+   "chip": "1 · LA CARPA",
+   "props": [
+    {
+     "type": "tent",
+     "x": 0.6,
+     "z": -1.5,
+     "s": 1.3,
+     "buried": true,
+     "torn": true
+    }
+   ],
+   "stickman": [
+    {
+     "action": "look",
+     "x": 0.2,
+     "prop": "🔦"
+    },
+    {
+     "action": "point",
+     "x": 0.82,
+     "facing": "left",
+     "color": "orange"
+    }
+   ],
+   "line": "Días después de la desaparición, los rescatistas encontraron la carpa medio enterrada en la nieve, y rasgada desde adentro."
+  },
+  {
+   "set": "snow_day",
+   "camera": "close",
+   "chip": "2 · LAS BOTAS",
+   "emoji": [
+    "🥾",
+    "🧥"
+   ],
+   "props": [
+    {
+     "type": "boots",
+     "x": 0.0,
+     "z": -0.8,
+     "n": 9,
+     "s": 1.2
+    }
+   ],
+   "stickman": [
+    {
+     "action": "shrug",
+     "x": 0.75,
+     "facing": "left",
+     "say": "¿SIN BOTAS?"
+    }
+   ],
+   "line": "Adentro estaban las botas de los nueve, ordenadas contra la pared, y la ropa de abrigo lista para usar."
+  },
+  {
+   "set": "snow_night",
+   "chip": "3 · DESCALZOS",
+   "big": "-30 °C",
+   "props": [
+    {
+     "type": "footprints",
+     "x": -3.5,
+     "z": 0.6,
+     "n": 16
+    }
+   ],
+   "stickman": [
+    {
+     "action": "shiver",
+     "x": 0.5
+    }
+   ],
+   "line": "Nadie sale descalzo a treinta grados bajo cero... a menos que algo lo obligue a hacerlo."
+  },
+  {
+   "set": "forest_night",
+   "chip": "4 · EL CEDRO",
+   "props": [
+    {
+     "type": "cedar",
+     "x": -1.2,
+     "z": -1.5,
+     "s": 1.0
+    },
+    {
+     "type": "fire",
+     "x": 0.9,
+     "z": 0.2,
+     "s": 1.0
+    }
+   ],
+   "stickman": [
+    {
+     "action": "sad",
+     "x": 0.78,
+     "z": 0.4,
+     "color": "orange"
+    },
+    {
+     "action": "shiver",
+     "x": 0.95,
+     "z": -0.3
+    }
+   ],
+   "line": "Más abajo, junto a un gran cedro, encontraron a dos de ellos en ropa interior, al lado de los restos de una pequeña fogata."
+  },
+  {
+   "set": "forest_night",
+   "camera": "tall",
+   "chip": "5 · RAMAS ROTAS",
+   "big": "5 METROS",
+   "props": [
+    {
+     "type": "cedar",
+     "x": 0.0,
+     "z": -1.0,
+     "s": 1.1,
+     "broken": true
+    }
+   ],
+   "stickman": [
+    {
+     "action": "scared",
+     "x": 0.6,
+     "y": 1.9,
+     "z": 0.7,
+     "facing": "left",
+     "size": 0.9
+    }
+   ],
+   "line": "Las ramas del cedro estaban rotas hasta unos cinco metros de altura. Como si alguien hubiera trepado desesperado, para ver algo... o para escapar."
+  },
+  {
+   "set": "snow_night",
+   "chip": "6 · EL BARRANCO",
+   "props": [
+    {
+     "type": "ravine",
+     "x": 0,
+     "z": -2,
+     "s": 1.0
+    }
+   ],
+   "stickman": [
+    {
+     "action": "look",
+     "x": 0.5,
+     "prop": "🔦",
+     "face": "surprised"
+    }
+   ],
+   "line": "Los últimos cuatro aparecieron recién en mayo, en un barranco, bajo varios metros de nieve."
+  },
+  {
+   "set": "red",
+   "chip": "7 · LO MÁS PERTURBADOR",
+   "emoji": [
+    "👁️",
+    "❓"
+   ],
+   "stickman": [
+    {
+     "action": "scared",
+     "x": 0.5
+    }
+   ],
+   "line": "Y lo que encontraron fue aún más perturbador. A dos de ellos les faltaban los ojos, y a una joven, también la lengua."
+  },
+  {
+   "set": "lab",
+   "chip": "8 · RADIACIÓN",
+   "big": "RADIACIÓN",
+   "props": [
+    {
+     "type": "glow_items",
+     "x": 0.2,
+     "z": 0.6,
+     "n": 4
+    }
+   ],
+   "stickman": [
+    {
+     "action": "point",
+     "x": 0.25,
+     "prop": "📟",
+     "face": "surprised"
+    }
+   ],
+   "line": "Además, algunas prendas de ropa tenían rastros de radiación. Nadie supo explicar de dónde salió."
+  },
+  {
+   "set": "snow_night",
+   "camera": "low",
+   "chip": "9 · LUCES NARANJAS",
+   "props": [
+    {
+     "type": "orbs",
+     "x": 0.3,
+     "y": 4.2,
+     "z": -6,
+     "n": 3,
+     "s": 1.2
+    }
+   ],
+   "stickman": [
+    {
+     "action": "look",
+     "x": 0.35,
+     "face": "surprised"
+    }
+   ],
+   "line": "En esas mismas semanas, otros excursionistas y militares de la zona dijeron haber visto esferas de luz naranja en el cielo."
+  },
+  {
+   "set": "snow_day",
+   "chip": "10 · PIEL NARANJA",
+   "emoji": [
+    "🟠",
+    "🤔"
+   ],
+   "stickman": [
+    {
+     "action": "think",
+     "x": 0.45,
+     "color": "orange"
+    }
+   ],
+   "line": "Y algunos testigos del funeral dijeron que la piel de los cuerpos tenía un extraño color anaranjado."
+  },
+  {
+   "set": "lab",
+   "chip": "LAS RESPUESTAS",
+   "big": "¿QUÉ PASÓ?",
+   "props": [],
+   "stickman": [
+    {
+     "action": "think",
+     "x": 0.5
+    }
+   ],
+   "line": "Entonces... ¿qué pasó realmente? Vamos con lo que dicen los expertos."
+  },
+  {
+   "set": "forest_day",
+   "chip": "RESPUESTA 1",
+   "emoji": [
+    "🦊",
+    "🐦‍⬛"
+   ],
+   "big": "ANIMALES",
+   "stickman": [
+    {
+     "action": "talk",
+     "x": 0.5
+    }
+   ],
+   "line": "Los ojos y la lengua: los cuerpos pasaron semanas a la intemperie, y es probable que animales carroñeros causaran esas heridas."
+  },
+  {
+   "set": "forest_day",
+   "chip": "RESPUESTA 2",
+   "big": "PLANTA NUCLEAR",
+   "props": [
+    {
+     "type": "factory",
+     "x": 1.5,
+     "z": -4,
+     "s": 1.2
+    }
+   ],
+   "stickman": [
+    {
+     "action": "point",
+     "x": 0.3
+    }
+   ],
+   "line": "La radiación: uno de ellos había trabajado en la planta nuclear de Mayak, y pudo llevar ropa contaminada en su mochila."
+  },
+  {
+   "set": "snow_day",
+   "chip": "RESPUESTA 3",
+   "big": "BRONCEADO",
+   "props": [
+    {
+     "type": "sun",
+     "x": 1.4,
+     "y": 4.6,
+     "z": -9,
+     "r": 0.9
+    }
+   ],
+   "stickman": [
+    {
+     "action": "idle",
+     "x": 0.45,
+     "color": "orange",
+     "face": "neutral"
+    }
+   ],
+   "line": "La piel naranja: otros testigos la describieron simplemente como un bronceado fuerte, por el sol y el viento de la montaña."
+  },
+  {
+   "set": "snow_day",
+   "chip": "RESPUESTA 4",
+   "big": "AVALANCHA",
+   "shake_at": 1.8,
+   "props": [
+    {
+     "type": "tent",
+     "x": 0.4,
+     "z": -1.6,
+     "s": 1.2
+    },
+    {
+     "type": "avalanche",
+     "z": -2.5
+    }
+   ],
+   "stickman": [
+    {
+     "action": "run_away",
+     "x": 0.55,
+     "face": "fear"
+    },
+    {
+     "action": "run_away",
+     "x": 0.75,
+     "phase": 0.5,
+     "color": "orange"
+    }
+   ],
+   "line": "Y la carpa abandonada: la teoría más aceptada hoy es una pequeña avalancha, que los obligó a huir en plena noche."
+  },
+  {
+   "set": "forest_night",
+   "chip": "¿CASO CERRADO?",
+   "props": [
+    {
+     "type": "orbs",
+     "x": 0,
+     "y": 4.5,
+     "z": -8,
+     "n": 3
+    }
+   ],
+   "stickman": [
+    {
+     "action": "shrug",
+     "x": 0.5
+    }
+   ],
+   "line": "Muchos creen que las luces eran pruebas de misiles soviéticos. Pero lo que pasó esa noche junto al cedro... todavía pone la piel de gallina."
+  },
+  {
+   "set": "snow_night",
+   "title": [
+    "¿AVALANCHA",
+    "O ALGO MÁS?"
+   ],
+   "stickman": [
+    {
+     "action": "wave",
+     "x": 0.2,
+     "size": 0.85,
+     "face": "happy"
+    }
+   ],
+   "line": "¿Tú qué crees? ¿Avalancha, o algo más? Comenta, y sígueme para la parte tres."
+  }
+ ]
+}
